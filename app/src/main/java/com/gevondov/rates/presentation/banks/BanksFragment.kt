@@ -8,7 +8,9 @@ import com.gevondov.rates.presentation.banks.adapter.BankListItem
 import com.gevondov.rates.presentation.banks.adapter.BanksAdapter
 import com.gevondov.rates.presentation.base.BaseFragment
 
-class BanksFragment : BaseFragment(R.layout.fragment_banks) {
+class BanksFragment : BaseFragment(
+    R.layout.fragment_banks
+), BanksContract.View {
 
     override val recyclerView: RecyclerView?
         get() = view?.findViewById(R.id.banks)
@@ -18,7 +20,7 @@ class BanksFragment : BaseFragment(R.layout.fragment_banks) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter.updateItems(listOf(
+        updateItems(listOf(
             BankListItem("EvocaBank", 484.5F, 487F),
             BankListItem("UniBank", 484F, 487.5F),
             BankListItem("IdBank", 484.5F, 487.5F),
