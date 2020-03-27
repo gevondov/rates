@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gevondov.rates.presentation.base.adapter.BaseAdapter
 import com.gevondov.rates.presentation.base.adapter.BaseListItem
 
-abstract class BaseFragment(
+abstract class BaseFragment<V : BaseContract.View>(
     @LayoutRes layout: Int
 ) : Fragment(
     layout
@@ -18,6 +18,7 @@ abstract class BaseFragment(
 
     protected abstract val recyclerView: RecyclerView?
     protected abstract val adapter: BaseAdapter
+    protected abstract val presenter: BaseContract.Presenter<V>
 
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,6 +28,14 @@ abstract class BaseFragment(
             layoutManager = LinearLayoutManager(requireContext())
             adapter = this@BaseFragment.adapter
         }
+
+        presenter.bind(this as V)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        presenter.unBind()
     }
 
     override fun updateItems(newItems: List<BaseListItem>) {

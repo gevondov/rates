@@ -6,4 +6,6 @@ class BanksContract {
 
     interface View : BaseContract.View
 
+    interface Presenter : BaseContract.Presenter<View>
+
 }

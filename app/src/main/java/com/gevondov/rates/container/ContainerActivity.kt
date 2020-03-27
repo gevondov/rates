@@ -7,6 +7,7 @@ import com.gevondov.rates.R
 class ContainerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportFragmentManager.fragmentFactory = ContainerFragmentFactory()
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_container)
