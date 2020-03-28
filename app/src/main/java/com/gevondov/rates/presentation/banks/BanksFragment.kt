@@ -5,9 +5,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.gevondov.rates.R
 import com.gevondov.rates.presentation.bank.BankFragment
-import com.gevondov.rates.presentation.banks.adapter.BankListItem
 import com.gevondov.rates.presentation.banks.adapter.BanksAdapter
 import com.gevondov.rates.presentation.base.BaseFragment
+import com.gevondov.rates.presentation.common.adapter.RateListItem
 import io.reactivex.Observable
 
 class BanksFragment(
@@ -23,7 +23,7 @@ class BanksFragment(
 
     override val bankItemClicks: Observable<String>
         get() = adapter.clicks()
-            .filter { it is BankListItem }
+            .filter { it is RateListItem }
             .map { it.id }
 
     override fun navigateToBank(id: String) {

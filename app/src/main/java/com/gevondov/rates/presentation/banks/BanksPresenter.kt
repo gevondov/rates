@@ -1,8 +1,9 @@
 package com.gevondov.rates.presentation.banks
 
 import android.util.Log
-import com.gevondov.rates.presentation.banks.adapter.BankListItem
+import com.gevondov.rates.R
 import com.gevondov.rates.presentation.base.BasePresenter
+import com.gevondov.rates.presentation.common.adapter.RateListItem
 
 class BanksPresenter(
     private val model: BanksContract.Model
@@ -19,7 +20,7 @@ class BanksPresenter(
             .subscribe(this::onBankItemClick, this::onBankItemCLickError))
 
         val banks = model.getBanks()
-            .map { BankListItem(it.id, it.name, it.rates.first().buy, it.rates.first().sell) }
+            .map { RateListItem(it.id, R.drawable.ic_bank, it.name, it.rates.first().buy, it.rates.first().sell) }
         view.updateItems(banks)
     }
 

@@ -1,9 +1,11 @@
-package com.gevondov.rates.presentation.banks.adapter
+package com.gevondov.rates.presentation.common.adapter
 
+import androidx.annotation.DrawableRes
 import com.gevondov.rates.presentation.base.adapter.BaseListItem
 
-data class BankListItem(
+data class RateListItem(
     override val id: String,
+    @DrawableRes val icon: Int,
     val name: String,
     val buyRate: Float,
     val sellRate: Float
