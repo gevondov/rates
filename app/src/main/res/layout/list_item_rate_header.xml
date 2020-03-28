@@ -21,7 +21,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/buy_rate"
-        tools:text="@string/bank"/>
+        tools:text="@string/bank" />
 
     <TextView
         android:id="@+id/buy_rate"
@@ -36,7 +36,7 @@
         app:layout_constraintTop_toTopOf="@id/name"
         app:layout_constraintBottom_toBottomOf="@id/name"
         app:layout_constraintEnd_toStartOf="@id/sell_rate"
-        app:layout_constraintStart_toEndOf="@id/name"/>
+        app:layout_constraintStart_toEndOf="@id/name" />
 
     <TextView
         android:id="@+id/sell_rate"
@@ -50,6 +50,6 @@
         app:layout_constraintTop_toTopOf="@id/name"
         app:layout_constraintBottom_toBottomOf="@id/name"
         app:layout_constraintStart_toEndOf="@id/buy_rate"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

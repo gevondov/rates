@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="09:05-17:00"/>
+        tools:text="09:05-17:00" />
 
     <TextView
         android:id="@+id/days"
@@ -24,6 +24,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/hours"
-        tools:text="Mon-Fri"/>
+        tools:text="Mon-Fri" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

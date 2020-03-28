@@ -32,4 +32,5 @@ class BranchesResponseDeserializer : JsonDeserializer<BranchesResponse> {
         }
         return BranchesResponse(branches)
     }
+
 }

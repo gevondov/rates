@@ -11,10 +11,6 @@ class BanksPresenter(
     private val rateListItemMapper: RateListItemMapper
 ) : BasePresenter<BanksContract.View>(), BanksContract.Presenter {
 
-    companion object {
-        const val TAG = "BanksPresenter"
-    }
-
     private var currentCurrency: String? = null
 
     override fun bind(view: BanksContract.View) {

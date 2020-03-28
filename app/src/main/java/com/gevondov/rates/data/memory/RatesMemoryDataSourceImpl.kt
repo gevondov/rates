@@ -13,33 +13,25 @@ class RatesMemoryDataSourceImpl(
     private val banks = mutableListOf<BankEntity>()
     private val bankIdToBranches = mutableMapOf<String, List<BranchEntity>>()
 
-    override fun saveBanks(banks: List<BankEntity>): Completable {
-        return Completable.fromAction {
-            this.banks.clear()
-            this.banks.addAll(banks)
-            rateDataEmitter.emitBanksChanges()
-        }
+    override fun saveBanks(banks: List<BankEntity>) = Completable.fromAction {
+        this.banks.clear()
+        this.banks.addAll(banks)
+        rateDataEmitter.emitBanksChanges()
     }
 
-    override fun saveBranches(bankId: String, branches: List<BranchEntity>): Completable {
-        return Completable.fromAction {
-            bankIdToBranches[bankId] = branches
-            rateDataEmitter.emitBranchChanges()
-        }
+    override fun saveBranches(bankId: String, branches: List<BranchEntity>) = Completable.fromAction {
+        bankIdToBranches[bankId] = branches
+        rateDataEmitter.emitBranchChanges()
     }
 
-    override fun getCurrencies(): Single<List<String>> {
-        return Single.just(banks.flatMap { it.rates }.map { it.name }.distinct())
-    }
+    override fun getCurrencies() =
+        Single.just(banks.flatMap { it.rates }.map { it.name }.distinct())
 
-    override fun getBank(bankId: String): Single<BankEntity> {
-        val bank = banks.find { it.id == bankId }
-        return Single.just(bank)
-    }
+    override fun getBank(bankId: String) =
+        Single.just(banks.first { it.id == bankId })
 
-    override fun getBanks(currency: String): Single<List<BankEntity>> {
-        return Single.just(banks.filter { it.rates.any { rate -> rate.name == currency } })
-    }
+    override fun getBanks(currency: String) =
+        Single.just(banks.filter { it.rates.any { rate -> rate.name == currency } })
 
     override fun getBranch(bankId: String): Single<BranchEntity> {
         val branches = bankIdToBranches[bankId] ?: emptyList()

@@ -33,4 +33,5 @@ class BanksAdapter : BaseAdapter() {
             else -> throw IllegalStateException("Incorrect view type: $viewType")
         }
     }
+
 }
