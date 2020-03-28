@@ -22,21 +22,29 @@ class BanksPresenter(
         addDisposable(view.bankItemClicks
             .subscribe(this::onBankItemClick, this::onBankItemCLickError))
 
-        loadBanks(view)
-
         addDisposable(model.refreshBanks()
             .subscribe({}, Throwable::printStackTrace))
 
         addDisposable(model.observeBanksChanges()
-            .subscribe({ loadBanks(view) }, Throwable::printStackTrace))
+            .subscribe({ loadCurrencies() }, Throwable::printStackTrace))
     }
 
-    private fun loadBanks(view: BanksContract.View) {
-        addDisposable(model.getBanks()
-            .map(rateListItemMapper::fromBanks)
+    private fun loadCurrencies() {
+        addDisposable(model.getCurrencies()
+            .subscribe(this::onCurrenciesNext, Throwable::printStackTrace))
+    }
+
+    private fun onCurrenciesNext(currencies: List<String>) {
+        view?.showCurrencies(currencies)
+        loadBanks(currencies.first())
+    }
+
+    private fun loadBanks(currency: String) {
+        addDisposable(model.getBanks(currency)
+            .map { rateListItemMapper.fromBanks(it, currency) }
             .map { listOf(RateHeaderListItem(title = R.string.bank)) + it }
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(view::updateItems, Throwable::printStackTrace))
+            .subscribe({ view?.updateItems(it) }, Throwable::printStackTrace))
     }
 
     private fun onBankItemClick(id: String) {

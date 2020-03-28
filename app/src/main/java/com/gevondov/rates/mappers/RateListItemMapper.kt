@@ -6,13 +6,13 @@ import com.gevondov.rates.presentation.common.adapter.rates.RateListItem
 
 class RateListItemMapper {
 
-    fun fromBanks(banks: List<Bank>) = banks.map { bank ->
+    fun fromBanks(banks: List<Bank>, currency: String) = banks.map { bank ->
         RateListItem(
             id = bank.id,
             icon = R.drawable.ic_bank,
             name = bank.name,
-            buyRate = bank.rates.first().buy,
-            sellRate = bank.rates.first().sell
+            buyRate = bank.rates.find { it.name == currency }?.buy ?: 0F,
+            sellRate = bank.rates.find { it.name == currency }?.sell ?: 0F
         )
     }
 

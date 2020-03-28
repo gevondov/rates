@@ -14,7 +14,9 @@ class BanksContract {
 
         fun refreshBanks(): Completable
 
-        fun getBanks(): Single<List<Bank>>
+        fun getCurrencies(): Single<List<String>>
+
+        fun getBanks(currency: String): Single<List<Bank>>
 
     }
 
@@ -23,6 +25,8 @@ class BanksContract {
         val bankItemClicks: Observable<String>
 
         fun navigateToBank(id: String)
+
+        fun showCurrencies(currencies: List<String>)
 
     }
 

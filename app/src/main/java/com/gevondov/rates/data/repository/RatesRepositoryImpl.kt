@@ -29,8 +29,12 @@ class RatesRepositoryImpl(
             .flatMapCompletable { memoryDataSource.saveBranches(bankId, it) }
     }
 
-    override fun getBanks(): Single<List<Bank>> {
-        return memoryDataSource.getBanks()
+    override fun getCurrencies(): Single<List<String>> {
+        return memoryDataSource.getCurrencies()
+    }
+
+    override fun getBanks(currency: String): Single<List<Bank>> {
+        return memoryDataSource.getBanks(currency)
             .map(bankMapper::fromEntities)
     }
 

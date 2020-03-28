@@ -11,7 +11,9 @@ interface RatesRepository {
 
     fun refreshBranch(bankId: String): Completable
 
-    fun getBanks(): Single<List<Bank>>
+    fun getCurrencies(): Single<List<String>>
+
+    fun getBanks(currency: String): Single<List<Bank>>
 
     fun getBranch(bankId: String): Single<Branch>
 

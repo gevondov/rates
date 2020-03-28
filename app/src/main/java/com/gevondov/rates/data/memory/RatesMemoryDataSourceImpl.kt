@@ -28,13 +28,17 @@ class RatesMemoryDataSourceImpl(
         }
     }
 
+    override fun getCurrencies(): Single<List<String>> {
+        return Single.just(banks.flatMap { it.rates }.map { it.name }.distinct())
+    }
+
     override fun getBank(bankId: String): Single<BankEntity> {
         val bank = banks.find { it.id == bankId }
         return Single.just(bank)
     }
 
-    override fun getBanks(): Single<List<BankEntity>> {
-        return Single.just(banks)
+    override fun getBanks(currency: String): Single<List<BankEntity>> {
+        return Single.just(banks.filter { it.rates.any { rate -> rate.name == currency } })
     }
 
     override fun getBranch(bankId: String): Single<BranchEntity> {

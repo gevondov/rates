@@ -10,7 +10,9 @@ class RatesInteractorImpl(
 
     override fun refreshBranch(bankId: String) = ratesRepository.refreshBranch(bankId)
 
-    override fun getBanks() = ratesRepository.getBanks()
+    override fun getCurrencies() = ratesRepository.getCurrencies()
+
+    override fun getBanks(currency: String) = ratesRepository.getBanks(currency)
 
     override fun getBranch(bankId: String) = ratesRepository.getBranch(bankId)
 

@@ -31,4 +31,8 @@ class BanksFragment(
         findNavController().navigate(R.id.from_banks_to_bank, args)
     }
 
+    override fun showCurrencies(currencies: List<String>) {
+
+    }
+
 }

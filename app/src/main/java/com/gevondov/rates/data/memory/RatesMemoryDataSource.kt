@@ -11,9 +11,11 @@ interface RatesMemoryDataSource {
 
     fun saveBranches(bankId: String, branches: List<BranchEntity>): Completable
 
+    fun getCurrencies(): Single<List<String>>
+
     fun getBank(bankId: String): Single<BankEntity>
 
-    fun getBanks(): Single<List<BankEntity>>
+    fun getBanks(currency: String): Single<List<BankEntity>>
 
     fun getBranch(bankId: String): Single<BranchEntity>
 

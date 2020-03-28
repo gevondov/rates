@@ -12,6 +12,8 @@ class BanksModel(
 
     override fun refreshBanks() = ratesInteractor.refreshBanks()
 
-    override fun getBanks() = ratesInteractor.getBanks()
+    override fun getCurrencies() = ratesInteractor.getCurrencies()
+
+    override fun getBanks(currency: String) = ratesInteractor.getBanks(currency)
 
 }
