@@ -1,8 +1,10 @@
 package com.gevondov.rates.presentation.bank
 
+import com.gevondov.rates.R
 import com.gevondov.rates.domain.model.WorkingDay
 import com.gevondov.rates.presentation.bank.adapter.header.BankHeaderListItem
 import com.gevondov.rates.presentation.base.BasePresenter
+import com.gevondov.rates.presentation.common.adapter.RateListItem
 
 class BankPresenter(
     private val model: BankContract.Model
@@ -23,7 +25,9 @@ class BankPresenter(
                 hours = it.hours
             ) }
         )
-        view.updateItems(listOf(bankHeaderItem))
+        val rates = branch.bank.rates
+            .map { RateListItem(it.name, R.drawable.ic_currency, it.name, it.buy, it.sell) }
+        view.updateItems(listOf(bankHeaderItem) + rates)
     }
 
     private fun formatDays(workingDay: WorkingDay): String {

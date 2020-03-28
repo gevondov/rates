@@ -9,7 +9,7 @@ abstract class BaseAdapter : RecyclerView.Adapter<BaseViewHolder<BaseListItem>>(
 
     private val clicks = PublishSubject.create<BaseListItem>()
 
-    private val items = mutableListOf<BaseListItem>()
+    protected val items = mutableListOf<BaseListItem>()
 
     fun updateItems(newItems: List<BaseListItem>) {
         items.clear()
