@@ -13,12 +13,11 @@
         <item name="android:gravity">center</item>
         <item name="android:paddingStart">16dp</item>
         <item name="android:paddingEnd">16dp</item>
-        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="Text.Title">
         <item name="android:textColor">#878787</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="Text.ShowOnMap">

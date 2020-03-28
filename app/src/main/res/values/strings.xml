@@ -3,4 +3,8 @@
     <string name="contact_number">Contact number</string>
     <string name="working_days">Working days</string>
     <string name="show_on_map">View on map</string>
+    <string name="buy">Buy</string>
+    <string name="sell">Sell</string>
+    <string name="bank">Bank</string>
+    <string name="currency">Currency</string>
 </resources>

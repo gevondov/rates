@@ -1,8 +1,10 @@
 package com.gevondov.rates.presentation.bank
 
+import com.gevondov.rates.R
 import com.gevondov.rates.mappers.BankHeaderListItemMapper
 import com.gevondov.rates.mappers.RateListItemMapper
 import com.gevondov.rates.presentation.base.BasePresenter
+import com.gevondov.rates.presentation.common.adapter.header.RateHeaderListItem
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 class BankPresenter(
@@ -27,7 +29,7 @@ class BankPresenter(
 
     private fun loadBranch(view: BankContract.View) {
         addDisposable(model.getBranch(bankId)
-            .map { listOf(bankHeaderListItemMapper.fromBranch(it)) + rateListItemMapper.fromBank(it.bank) }
+            .map { listOf(bankHeaderListItemMapper.fromBranch(it), RateHeaderListItem(title = R.string.currency)) + rateListItemMapper.fromBank(it.bank) }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(view::updateItems, Throwable::printStackTrace))
     }

@@ -4,60 +4,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@drawable/ic_bank"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/name"/>
+    android:layout_height="wrap_content"
+    android:background="@color/colorAccent"
+    android:minHeight="48dp">
 
     <TextView
         android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:textColor="@android:color/black"
+        android:textColor="#535353"
         android:maxLines="1"
         android:ellipsize="end"
         app:layout_constraintHorizontal_weight="2"
-        app:layout_constraintTop_toTopOf="@id/icon"
-        app:layout_constraintBottom_toBottomOf="@id/icon"
-        app:layout_constraintStart_toEndOf="@id/icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/buy_rate"
-        tools:text="Inecobank"/>
+        tools:text="@string/bank"/>
 
     <TextView
         android:id="@+id/buy_rate"
         style="@style/Text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
+        android:textColor="#535353"
         android:gravity="end"
+        android:text="@string/buy"
         app:layout_constraintHorizontal_weight="1.5"
-        app:layout_constraintTop_toTopOf="@id/icon"
-        app:layout_constraintBottom_toBottomOf="@id/icon"
+        app:layout_constraintTop_toTopOf="@id/name"
+        app:layout_constraintBottom_toBottomOf="@id/name"
         app:layout_constraintEnd_toStartOf="@id/sell_rate"
-        app:layout_constraintStart_toEndOf="@id/name"
-        tools:text="484.5"/>
+        app:layout_constraintStart_toEndOf="@id/name"/>
 
     <TextView
         android:id="@+id/sell_rate"
         style="@style/Text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textColor="#535353"
         android:gravity="end"
+        android:text="@string/sell"
         app:layout_constraintHorizontal_weight="1.5"
-        app:layout_constraintTop_toTopOf="@id/icon"
-        app:layout_constraintBottom_toBottomOf="@id/icon"
+        app:layout_constraintTop_toTopOf="@id/name"
+        app:layout_constraintBottom_toBottomOf="@id/name"
         app:layout_constraintStart_toEndOf="@id/buy_rate"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="487"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
