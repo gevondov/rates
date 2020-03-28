@@ -1,10 +1,9 @@
-package com.gevondov.rates.presentation.bank.adapter
+package com.gevondov.rates.presentation.bank
 
 import com.gevondov.rates.domain.model.Bank
 import com.gevondov.rates.domain.model.Branch
 import com.gevondov.rates.domain.model.Rate
 import com.gevondov.rates.domain.model.WorkingDay
-import com.gevondov.rates.presentation.bank.BankContract
 
 class BankModel : BankContract.Model {
 
