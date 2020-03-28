@@ -2,10 +2,13 @@ package com.gevondov.rates.data.memory
 
 import com.gevondov.rates.data.memory.entities.BankEntity
 import com.gevondov.rates.data.memory.entities.BranchEntity
+import com.gevondov.rates.data.observer.RateDataEmitter
 import io.reactivex.Completable
 import io.reactivex.Single
 
-class RatesMemoryDataSourceImpl : RatesMemoryDataSource {
+class RatesMemoryDataSourceImpl(
+    private val rateDataEmitter: RateDataEmitter
+) : RatesMemoryDataSource {
 
     private val banks = mutableListOf<BankEntity>()
     private val bankIdToBranches = mutableMapOf<String, List<BranchEntity>>()
@@ -14,12 +17,14 @@ class RatesMemoryDataSourceImpl : RatesMemoryDataSource {
         return Completable.fromAction {
             this.banks.clear()
             this.banks.addAll(banks)
+            rateDataEmitter.emitBanksChanges()
         }
     }
 
     override fun saveBranches(bankId: String, branches: List<BranchEntity>): Completable {
         return Completable.fromAction {
             bankIdToBranches[bankId] = branches
+            rateDataEmitter.emitBranchChanges()
         }
     }
 
@@ -37,4 +42,5 @@ class RatesMemoryDataSourceImpl : RatesMemoryDataSource {
         val headBranch = branches.find { it.isHead } ?: branches.firstOrNull()
         return headBranch?.let { Single.just(it) } ?: Single.never()
     }
+
 }

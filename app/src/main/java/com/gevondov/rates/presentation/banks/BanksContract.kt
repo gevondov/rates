@@ -10,6 +10,8 @@ class BanksContract {
 
     interface Model : BaseContract.Model {
 
+        fun observeBanksChanges(): Observable<Unit>
+
         fun refreshBanks(): Completable
 
         fun getBanks(): Single<List<Bank>>

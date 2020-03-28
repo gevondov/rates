@@ -10,6 +10,6 @@ val DATA_SOURCES_MODULE = module {
 
     single<RatesRemoteDataSource> { RatesRemoteDataSourceImpl() }
 
-    single<RatesMemoryDataSource> { RatesMemoryDataSourceImpl() }
+    single<RatesMemoryDataSource> { RatesMemoryDataSourceImpl(get()) }
 
 }
