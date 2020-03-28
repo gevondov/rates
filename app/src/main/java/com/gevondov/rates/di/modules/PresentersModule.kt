@@ -8,8 +8,8 @@ import org.koin.dsl.module
 
 val PRESENTERS_MODULE = module {
 
-    factory<BanksContract.Presenter> { BanksPresenter(get()) }
+    factory<BanksContract.Presenter> { BanksPresenter(get(), get()) }
 
-    factory<BankContract.Presenter> { BankPresenter(get()) }
+    factory<BankContract.Presenter> { BankPresenter(get(), get(), get()) }
 
 }

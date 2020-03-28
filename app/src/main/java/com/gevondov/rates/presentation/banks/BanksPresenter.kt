@@ -1,12 +1,12 @@
 package com.gevondov.rates.presentation.banks
 
 import android.util.Log
-import com.gevondov.rates.R
+import com.gevondov.rates.mappers.RateListItemMapper
 import com.gevondov.rates.presentation.base.BasePresenter
-import com.gevondov.rates.presentation.common.adapter.RateListItem
 
 class BanksPresenter(
-    private val model: BanksContract.Model
+    private val model: BanksContract.Model,
+    private val rateListItemMapper: RateListItemMapper
 ) : BasePresenter<BanksContract.View>(), BanksContract.Presenter {
 
     companion object {
@@ -20,7 +20,7 @@ class BanksPresenter(
             .subscribe(this::onBankItemClick, this::onBankItemCLickError))
 
         addDisposable(model.getBanks()
-            .map { list -> list.map { RateListItem(it.id, R.drawable.ic_bank, it.name, it.rates.first().buy, it.rates.first().sell) } }
+            .map(rateListItemMapper::fromBanks)
             .subscribe(view::updateItems, Throwable::printStackTrace))
     }
 
