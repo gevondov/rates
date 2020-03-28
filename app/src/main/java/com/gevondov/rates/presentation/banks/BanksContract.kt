@@ -26,6 +26,8 @@ class BanksContract {
 
         fun navigateToBank(id: String)
 
+        fun showCurrency(currency: String)
+
         fun showCurrencies(currencies: List<String>)
 
     }

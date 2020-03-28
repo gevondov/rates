@@ -16,6 +16,8 @@ class BanksPresenter(
         const val TAG = "BanksPresenter"
     }
 
+    private var currentCurrency: String? = null
+
     override fun bind(view: BanksContract.View) {
         super.bind(view)
 
@@ -26,17 +28,26 @@ class BanksPresenter(
             .subscribe({}, Throwable::printStackTrace))
 
         addDisposable(model.observeBanksChanges()
-            .subscribe({ loadCurrencies() }, Throwable::printStackTrace))
+            .subscribe(this::onObserveBanksNext, Throwable::printStackTrace))
     }
 
-    private fun loadCurrencies() {
+    private fun onObserveBanksNext(ignore: Unit) {
+        if (currentCurrency == null) {
+            loadCurrentCurrency()
+        } else {
+            loadBanks(currentCurrency!!)
+        }
+    }
+
+    private fun loadCurrentCurrency() {
         addDisposable(model.getCurrencies()
-            .subscribe(this::onCurrenciesNext, Throwable::printStackTrace))
-    }
-
-    private fun onCurrenciesNext(currencies: List<String>) {
-        view?.showCurrencies(currencies)
-        loadBanks(currencies.first())
+            .subscribe({
+                it.firstOrNull()?.let { currency ->
+                    currentCurrency = currency
+                    view?.showCurrency(currency)
+                    loadBanks(currency)
+                }
+            }, Throwable::printStackTrace))
     }
 
     private fun loadBanks(currency: String) {

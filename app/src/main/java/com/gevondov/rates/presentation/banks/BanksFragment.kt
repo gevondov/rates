@@ -1,5 +1,6 @@
 package com.gevondov.rates.presentation.banks
 
+import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +30,10 @@ class BanksFragment(
     override fun navigateToBank(id: String) {
         val args = bundleOf(BankFragment.ARGS_BANK_ID to id)
         findNavController().navigate(R.id.from_banks_to_bank, args)
+    }
+
+    override fun showCurrency(currency: String) {
+        view?.findViewById<TextView>(R.id.currency_selector)?.text = currency
     }
 
     override fun showCurrencies(currencies: List<String>) {
