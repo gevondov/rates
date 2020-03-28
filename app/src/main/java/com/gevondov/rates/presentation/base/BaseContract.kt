@@ -1,6 +1,7 @@
 package com.gevondov.rates.presentation.base
 
 import com.gevondov.rates.presentation.base.adapter.BaseListItem
+import io.reactivex.disposables.Disposable
 
 interface BaseContract {
 
@@ -17,6 +18,8 @@ interface BaseContract {
         fun bind(view: V)
 
         fun unBind()
+
+        fun addDisposable(disposable: Disposable)
 
     }
 

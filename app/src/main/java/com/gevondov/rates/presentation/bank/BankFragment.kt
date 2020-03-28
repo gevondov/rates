@@ -11,6 +11,10 @@ class BankFragment(
     R.layout.fragment_bank
 ), BankContract.View {
 
+    companion object {
+        const val ARGS_BANK_ID = "args.bank_id"
+    }
+
     override val recyclerView: RecyclerView?
         get() = view?.findViewById(R.id.bank)
 

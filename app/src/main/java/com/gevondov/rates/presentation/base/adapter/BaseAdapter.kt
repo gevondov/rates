@@ -2,8 +2,12 @@ package com.gevondov.rates.presentation.base.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 
 abstract class BaseAdapter : RecyclerView.Adapter<BaseViewHolder<BaseListItem>>() {
+
+    private val clicks = PublishSubject.create<BaseListItem>()
 
     private val items = mutableListOf<BaseListItem>()
 
@@ -13,6 +17,8 @@ abstract class BaseAdapter : RecyclerView.Adapter<BaseViewHolder<BaseListItem>>(
         notifyDataSetChanged()
     }
 
+    fun clicks(): Observable<BaseListItem> = clicks
+
     override fun getItemCount() = items.size
 
     override fun onBindViewHolder(holder: BaseViewHolder<BaseListItem>, position: Int) {
@@ -21,7 +27,11 @@ abstract class BaseAdapter : RecyclerView.Adapter<BaseViewHolder<BaseListItem>>(
     }
 
     final override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<BaseListItem> {
-        return createHolder(parent, viewType) as BaseViewHolder<BaseListItem>
+        val holder = createHolder(parent, viewType) as BaseViewHolder<BaseListItem>
+        holder.clicks()
+            .map { items[holder.adapterPosition] }
+            .subscribe(clicks)
+        return holder
     }
 
     abstract fun createHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<out BaseListItem>
