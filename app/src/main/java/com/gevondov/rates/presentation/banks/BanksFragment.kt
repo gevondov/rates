@@ -7,7 +7,7 @@ import com.gevondov.rates.R
 import com.gevondov.rates.presentation.bank.BankFragment
 import com.gevondov.rates.presentation.banks.adapter.BanksAdapter
 import com.gevondov.rates.presentation.base.BaseFragment
-import com.gevondov.rates.presentation.common.adapter.RateListItem
+import com.gevondov.rates.presentation.common.adapter.rates.RateListItem
 import io.reactivex.Observable
 
 class BanksFragment(

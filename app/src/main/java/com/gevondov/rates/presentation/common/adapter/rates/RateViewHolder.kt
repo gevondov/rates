@@ -1,4 +1,4 @@
-package com.gevondov.rates.presentation.common.adapter
+package com.gevondov.rates.presentation.common.adapter.rates
 
 import android.view.View
 import android.widget.ImageView

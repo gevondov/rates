@@ -2,7 +2,7 @@ package com.gevondov.rates.mappers
 
 import com.gevondov.rates.R
 import com.gevondov.rates.domain.model.Bank
-import com.gevondov.rates.presentation.common.adapter.RateListItem
+import com.gevondov.rates.presentation.common.adapter.rates.RateListItem
 
 class RateListItemMapper {
 

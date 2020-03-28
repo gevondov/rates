@@ -1,4 +1,4 @@
-package com.gevondov.rates.presentation.common.adapter
+package com.gevondov.rates.presentation.common.adapter.rates
 
 import androidx.annotation.DrawableRes
 import com.gevondov.rates.presentation.base.adapter.BaseListItem
