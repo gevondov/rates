@@ -24,6 +24,11 @@ class BankFragment(
 
     override val adapter = BankAdapter()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        presenter.id = arguments!!.getString(ARGS_BANK_ID)!!
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         makeStatusBarTransparent()

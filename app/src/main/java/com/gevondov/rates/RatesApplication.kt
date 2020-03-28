@@ -1,6 +1,7 @@
 package com.gevondov.rates
 
 import android.app.Application
+import com.gevondov.rates.di.modules.INTERACTORS_MODULE
 import com.gevondov.rates.di.modules.MODELS_MODULE
 import com.gevondov.rates.di.modules.PRESENTERS_MODULE
 import org.koin.android.ext.koin.androidContext
@@ -15,7 +16,8 @@ class RatesApplication : Application() {
             androidContext(this@RatesApplication)
             modules(
                 PRESENTERS_MODULE,
-                MODELS_MODULE
+                MODELS_MODULE,
+                INTERACTORS_MODULE
             )
         }
     }

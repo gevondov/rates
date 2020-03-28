@@ -10,24 +10,25 @@ class BankPresenter(
     private val model: BankContract.Model
 ) : BasePresenter<BankContract.View>(), BankContract.Presenter {
 
+    override lateinit var id: String
+
     override fun bind(view: BankContract.View) {
         super.bind(view)
 
-        val branch = model.getBranch()
-        val bankHeaderItem = BankHeaderListItem(
-            id = branch.id,
-            name = branch.bank.name,
-            branchName = branch.name,
-            address = branch.address,
-            phone = branch.phone,
-            workingDays = branch.workingDays.map { BankHeaderListItem.WorkingDay(
-                days = formatDays(it),
-                hours = it.hours
-            ) }
-        )
-        val rates = branch.bank.rates
-            .map { RateListItem(it.name, R.drawable.ic_currency, it.name, it.buy, it.sell) }
-        view.updateItems(listOf(bankHeaderItem) + rates)
+        addDisposable(model.getBranch(id)
+            .map { branch -> listOf(BankHeaderListItem(
+                id = branch.id,
+                name = branch.bank.name,
+                branchName = branch.name,
+                address = branch.address,
+                phone = branch.phone,
+                workingDays = branch.workingDays.map { BankHeaderListItem.WorkingDay(
+                    days = formatDays(it),
+                    hours = it.hours
+                ) }
+            )) + branch.bank.rates
+                .map { RateListItem(it.name, R.drawable.ic_currency, it.name, it.buy, it.sell) } }
+            .subscribe(view::updateItems, Throwable::printStackTrace))
     }
 
     private fun formatDays(workingDay: WorkingDay): String {

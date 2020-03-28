@@ -19,9 +19,9 @@ class BanksPresenter(
         addDisposable(view.bankItemClicks
             .subscribe(this::onBankItemClick, this::onBankItemCLickError))
 
-        val banks = model.getBanks()
-            .map { RateListItem(it.id, R.drawable.ic_bank, it.name, it.rates.first().buy, it.rates.first().sell) }
-        view.updateItems(banks)
+        addDisposable(model.getBanks()
+            .map { list -> list.map { RateListItem(it.id, R.drawable.ic_bank, it.name, it.rates.first().buy, it.rates.first().sell) } }
+            .subscribe(view::updateItems, Throwable::printStackTrace))
     }
 
     private fun onBankItemClick(id: String) {

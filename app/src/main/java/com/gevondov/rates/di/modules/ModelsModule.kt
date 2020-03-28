@@ -8,8 +8,8 @@ import org.koin.dsl.module
 
 val MODELS_MODULE = module {
 
-    factory<BanksContract.Model> { BanksModel() }
+    factory<BanksContract.Model> { BanksModel(get()) }
 
-    factory<BankContract.Model> { BankModel() }
+    factory<BankContract.Model> { BankModel(get()) }
 
 }
