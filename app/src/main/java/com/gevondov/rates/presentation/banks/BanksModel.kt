@@ -6,6 +6,8 @@ class BanksModel(
     private val ratesInteractor: RatesInteractor
 ) : BanksContract.Model {
 
+    override fun refreshBanks() = ratesInteractor.refreshBanks()
+
     override fun getBanks() = ratesInteractor.getBanks()
 
 }

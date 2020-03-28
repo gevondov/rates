@@ -11,19 +11,19 @@ class BankHeaderListItemMapper {
         private val WEEKDAYS_SHORT = arrayOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
     }
 
-    fun fromBranch(branch: Branch): BankHeaderListItem {
-        return BankHeaderListItem(
-            id = branch.id,
-            name = branch.bank.name,
-            branchName = branch.name,
-            address = branch.address,
-            phone = branch.phone,
-            workingDays = branch.workingDays.map { BankHeaderListItem.WorkingDay(
-                days = formatDays(it),
-                hours = it.hours
-            ) }
-        )
-    }
+    fun fromBranch(branch: Branch) = BankHeaderListItem(
+        id = branch.id,
+        name = branch.bank.name,
+        branchName = branch.name,
+        address = branch.address,
+        phone = branch.phone,
+        workingDays = branch.workingDays.map(this::fromWorkingDay)
+    )
+
+    private fun fromWorkingDay(workingDay: WorkingDay) = BankHeaderListItem.WorkingDay(
+        days = formatDays(workingDay),
+        hours = workingDay.hours
+    )
 
     private fun formatDays(workingDay: WorkingDay): String {
         return if (workingDay.startDay == workingDay.endDay) {

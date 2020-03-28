@@ -26,7 +26,7 @@ class BankFragment(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter.id = arguments!!.getString(ARGS_BANK_ID)!!
+        presenter.bankId = arguments!!.getString(ARGS_BANK_ID)!!
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

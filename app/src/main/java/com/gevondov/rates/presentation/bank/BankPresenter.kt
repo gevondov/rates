@@ -10,12 +10,15 @@ class BankPresenter(
     private val rateListItemMapper: RateListItemMapper
 ) : BasePresenter<BankContract.View>(), BankContract.Presenter {
 
-    override lateinit var id: String
+    override lateinit var bankId: String
 
     override fun bind(view: BankContract.View) {
         super.bind(view)
 
-        addDisposable(model.getBranch(id)
+        addDisposable(model.refreshBranch(bankId)
+            .subscribe({}, Throwable::printStackTrace))
+
+        addDisposable(model.getBranch(bankId)
             .map { listOf(bankHeaderListItemMapper.fromBranch(it)) + rateListItemMapper.fromBank(it.bank)}
             .subscribe(view::updateItems, Throwable::printStackTrace))
     }

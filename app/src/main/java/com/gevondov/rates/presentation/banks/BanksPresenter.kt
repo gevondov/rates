@@ -19,6 +19,9 @@ class BanksPresenter(
         addDisposable(view.bankItemClicks
             .subscribe(this::onBankItemClick, this::onBankItemCLickError))
 
+        addDisposable(model.refreshBanks()
+            .subscribe({}, Throwable::printStackTrace))
+
         addDisposable(model.getBanks()
             .map(rateListItemMapper::fromBanks)
             .subscribe(view::updateItems, Throwable::printStackTrace))
