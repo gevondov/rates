@@ -1,5 +1,7 @@
 package com.gevondov.rates.presentation.banks
 
+import android.app.AlertDialog
+import android.view.View
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
@@ -9,6 +11,7 @@ import com.gevondov.rates.presentation.bank.BankFragment
 import com.gevondov.rates.presentation.banks.adapter.BanksAdapter
 import com.gevondov.rates.presentation.base.BaseFragment
 import com.gevondov.rates.presentation.common.adapter.rates.RateListItem
+import com.jakewharton.rxbinding3.view.clicks
 import io.reactivex.Observable
 
 class BanksFragment(
@@ -27,6 +30,9 @@ class BanksFragment(
             .filter { it is RateListItem }
             .map { it.id }
 
+    override val currencySelectorClicks: Observable<Unit>
+        get() = view?.findViewById<View>(R.id.currency_selector_background)?.clicks() ?: Observable.empty()
+
     override fun navigateToBank(id: String) {
         val args = bundleOf(BankFragment.ARGS_BANK_ID to id)
         findNavController().navigate(R.id.from_banks_to_bank, args)
@@ -36,8 +42,15 @@ class BanksFragment(
         view?.findViewById<TextView>(R.id.currency_selector)?.text = currency
     }
 
-    override fun showCurrencies(currencies: List<String>) {
-
+    override fun showCurrencies(currencies: List<String>, currentCurrency: String) {
+        val selectedPosition = currencies.indexOfFirst { it == currentCurrency }
+        AlertDialog.Builder(requireContext())
+            .setSingleChoiceItems(currencies.toTypedArray(), selectedPosition) { dialog, position ->
+                presenter.onCurrencySelected(currencies[position])
+                dialog.dismiss()
+            }
+            .setTitle(R.string.select_currency)
+            .show()
     }
 
 }

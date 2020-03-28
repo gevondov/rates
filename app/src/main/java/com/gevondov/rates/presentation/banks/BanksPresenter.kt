@@ -1,6 +1,5 @@
 package com.gevondov.rates.presentation.banks
 
-import android.util.Log
 import com.gevondov.rates.R
 import com.gevondov.rates.mappers.RateListItemMapper
 import com.gevondov.rates.presentation.base.BasePresenter
@@ -22,7 +21,10 @@ class BanksPresenter(
         super.bind(view)
 
         addDisposable(view.bankItemClicks
-            .subscribe(this::onBankItemClick, this::onBankItemCLickError))
+            .subscribe(this::onBankItemClick, Throwable::printStackTrace))
+
+        addDisposable(view.currencySelectorClicks
+            .subscribe(this::onCurrencySelectorClick, Throwable::printStackTrace))
 
         addDisposable(model.refreshBanks()
             .subscribe({}, Throwable::printStackTrace))
@@ -35,19 +37,14 @@ class BanksPresenter(
         if (currentCurrency == null) {
             loadCurrentCurrency()
         } else {
+            view?.showCurrency(currentCurrency!!)
             loadBanks(currentCurrency!!)
         }
     }
 
     private fun loadCurrentCurrency() {
         addDisposable(model.getCurrencies()
-            .subscribe({
-                it.firstOrNull()?.let { currency ->
-                    currentCurrency = currency
-                    view?.showCurrency(currency)
-                    loadBanks(currency)
-                }
-            }, Throwable::printStackTrace))
+            .subscribe({ onCurrencySelected(it.first()) }, Throwable::printStackTrace))
     }
 
     private fun loadBanks(currency: String) {
@@ -62,8 +59,15 @@ class BanksPresenter(
         view?.navigateToBank(id)
     }
 
-    private fun onBankItemCLickError(throwable: Throwable) {
-        Log.e(TAG, "onBankItemCLickError", throwable)
+    private fun onCurrencySelectorClick(ignore: Unit) {
+        addDisposable(model.getCurrencies()
+            .subscribe({ view?.showCurrencies(it, currentCurrency!!) }, Throwable::printStackTrace))
+    }
+
+    override fun onCurrencySelected(currency: String) {
+        currentCurrency = currency
+        view?.showCurrency(currency)
+        loadBanks(currency)
     }
 
 }

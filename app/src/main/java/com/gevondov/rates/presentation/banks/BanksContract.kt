@@ -24,14 +24,20 @@ class BanksContract {
 
         val bankItemClicks: Observable<String>
 
+        val currencySelectorClicks: Observable<Unit>
+
         fun navigateToBank(id: String)
 
         fun showCurrency(currency: String)
 
-        fun showCurrencies(currencies: List<String>)
+        fun showCurrencies(currencies: List<String>, currentCurrency: String)
 
     }
 
-    interface Presenter : BaseContract.Presenter<View>
+    interface Presenter : BaseContract.Presenter<View> {
+
+        fun onCurrencySelected(currency: String)
+
+    }
 
 }

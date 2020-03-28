@@ -7,4 +7,5 @@
     <string name="sell">Sell</string>
     <string name="bank">Bank</string>
     <string name="currency">Currency</string>
+    <string name="select_currency">Select currency</string>
 </resources>
