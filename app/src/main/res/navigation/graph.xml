@@ -10,5 +10,16 @@
         android:id="@+id/banksFragment"
         android:name="com.gevondov.rates.presentation.banks.BanksFragment"
         android:label="BanksFragment"
-        tools:layout="@layout/fragment_banks"/>
+        tools:layout="@layout/fragment_banks">
+
+        <action
+            android:id="@+id/from_banks_to_bank"
+            app:destination="@id/bankFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bankFragment"
+        android:name="com.gevondov.rates.presentation.bank.BankFragment"
+        android:label="BankFragment"
+        tools:layout="@layout/fragment_bank"/>
 </navigation>
