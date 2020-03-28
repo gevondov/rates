@@ -2,7 +2,9 @@ package com.gevondov.rates.di.modules
 
 import com.gevondov.rates.data.remote.network.RatesApi
 import com.gevondov.rates.data.remote.network.deserializers.BanksResponseDeserializer
+import com.gevondov.rates.data.remote.network.deserializers.BranchesResponseDeserializer
 import com.gevondov.rates.data.remote.response.BanksResponse
+import com.gevondov.rates.data.remote.response.BranchesResponse
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import org.koin.dsl.module
@@ -17,6 +19,7 @@ val NETWORK_MODULE = module {
     single<Gson> {
         GsonBuilder()
             .registerTypeAdapter(BanksResponse::class.java, BanksResponseDeserializer())
+            .registerTypeAdapter(BranchesResponse::class.java, BranchesResponseDeserializer())
             .create()
     }
 

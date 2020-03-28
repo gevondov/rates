@@ -12,7 +12,7 @@ class BranchMapper(
 
     fun fromResponse(response: BranchResponse) = BranchEntity(
         id = response.id,
-        isHead = response.isHead,
+        isHead = response.isHead != 0,
         name = response.name,
         address = response.address,
         phone = response.phone,
