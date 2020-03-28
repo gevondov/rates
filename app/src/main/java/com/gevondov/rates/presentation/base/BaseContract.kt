@@ -4,6 +4,8 @@ import com.gevondov.rates.presentation.base.adapter.BaseListItem
 
 interface BaseContract {
 
+    interface Model
+
     interface View {
 
         fun updateItems(newItems: List<BaseListItem>)
