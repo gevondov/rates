@@ -1,5 +1,6 @@
 package com.gevondov.rates.data.remote
 
+import com.gevondov.rates.data.remote.network.RatesApi
 import com.gevondov.rates.data.remote.response.BankResponse
 import com.gevondov.rates.data.remote.response.BranchResponse
 import com.gevondov.rates.data.remote.response.RateResponse
@@ -7,7 +8,9 @@ import com.gevondov.rates.data.remote.response.WorkingDayResponse
 import io.reactivex.Single
 import java.util.concurrent.TimeUnit
 
-class RatesRemoteDataSourceImpl : RatesRemoteDataSource {
+class RatesRemoteDataSourceImpl(
+    private val ratesApi: RatesApi
+) : RatesRemoteDataSource {
 
     val banks = listOf(
         BankResponse("db08ff22-add9-45ea-a450-1fe5b1993704", "EvocaBank", createRatesForEvocaBank()),
@@ -17,10 +20,8 @@ class RatesRemoteDataSourceImpl : RatesRemoteDataSource {
         BankResponse("5ee70183-87fe-4799-802e-ef7f5e7323db", "AraratBank", createRatesForAraratBank())
     )
 
-    override fun getBanks(): Single<List<BankResponse>> {
-        return Single.just(banks)
-            .delay(2, TimeUnit.SECONDS)
-    }
+    override fun getBanks() = ratesApi.getBanks()
+        .map { it.banks }
 
     override fun getBranches(bankId: String): Single<List<BranchResponse>> {
         return Single.just(listOf(createBranch(), createBranch(), createBranch()))

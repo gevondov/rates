@@ -8,7 +8,7 @@ import org.koin.dsl.module
 
 val DATA_SOURCES_MODULE = module {
 
-    single<RatesRemoteDataSource> { RatesRemoteDataSourceImpl() }
+    single<RatesRemoteDataSource> { RatesRemoteDataSourceImpl(get()) }
 
     single<RatesMemoryDataSource> { RatesMemoryDataSourceImpl(get()) }
 

@@ -19,7 +19,8 @@ class RatesApplication : Application() {
                 INTERACTORS_MODULE,
                 REPOSITORIES_MODULE,
                 DATA_SOURCES_MODULE,
-                DATA_OBSERVERS_MODULE
+                DATA_OBSERVERS_MODULE,
+                NETWORK_MODULE
             )
         }
     }
