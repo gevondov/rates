@@ -1,6 +1,7 @@
 package com.gevondov.rates.presentation.base.adapter
 
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
@@ -12,9 +13,11 @@ abstract class BaseAdapter : RecyclerView.Adapter<BaseViewHolder<BaseListItem>>(
     protected val items = mutableListOf<BaseListItem>()
 
     fun updateItems(newItems: List<BaseListItem>) {
+        val diffCallback = DiffUtilCallback(items, newItems)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
         items.clear()
         items.addAll(newItems)
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 
     fun clicks(): Observable<BaseListItem> = clicks
